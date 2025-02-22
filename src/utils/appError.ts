@@ -1,7 +1,7 @@
-// ERROR FOR THE ENTIRE APPLICATION
+// ERROR FOR THE ENTIRE APPLICATION.
 export class AppError extends Error {
     public readonly statusCode: number;
-    public readonly isOperational: boolean;
+    public readonly isOperational: boolean; // False means an unexpected error.
 
     constructor(message: string, statusCode: number, isOperational = true) {
         super(message);
