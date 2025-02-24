@@ -1,0 +1,44 @@
+/project-root
+│── /src
+│   ├── /config
+│   │   ├── config.ts             // Global configuration, environment settings
+│   │   ├── database.ts           // DB connection logic
+│   │
+│   ├── /controllers
+│   │   ├── auth.controller.ts
+│   │   ├── course.controller.ts
+│   │   ├── user.controller.ts
+│   │
+│   ├── /models
+│   │   ├── course.model.ts
+│   │   ├── user.model.ts
+│   │
+│   ├── /routes
+│   │   ├── auth.routes.ts
+│   │   ├── course.routes.ts
+│   │   ├── user.routes.ts
+│   │   ├── index.ts              // Centralized route aggregator
+│   │
+│   ├── /middlewares
+│   │   ├── auth.middleware.ts
+│   │   ├── error.middleware.ts    // Global error handling
+│   │   ├── validation.middleware.ts
+│   │
+│   ├── /services
+│   │   ├── auth.service.ts
+│   │   ├── course.service.ts
+│   │   ├── user.service.ts
+│   │
+│   ├── /utils
+│   │   ├── logger.ts              // Custom logger (e.g., using Winston)
+│   │   ├── helper.ts              // Utility functions
+│   │
+│   ├── /tests
+│   │   ├── /unit                  // Unit tests
+│   │   ├── /integration           // Integration tests
+│   │
+│   ├── app.ts                     // Express app instance
+│   ├── server.ts                   // Entry point: bootstraps the app
+│
+├── .env                            // Environment variables (never commit this file)
+├── package.json                     // Dependencies and scripts
