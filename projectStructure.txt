@@ -17,7 +17,7 @@
 │   │   ├── auth.routes.ts
 │   │   ├── course.routes.ts
 │   │   ├── user.routes.ts
-│   │   ├── index.ts              // Centralized route aggregator
+│   │   ├── index.ts               // Centralized route aggregator
 │   │
 │   ├── /middlewares
 │   │   ├── auth.middleware.ts
@@ -38,7 +38,7 @@
 │   │   ├── /integration           // Integration tests
 │   │
 │   ├── app.ts                     // Express app instance
-│   ├── server.ts                   // Entry point: bootstraps the app
+│   ├── server.ts                  // Entry point: bootstraps the app
 │
 ├── .env                            // Environment variables (never commit this file)
-├── package.json                     // Dependencies and scripts
+├── package.json                    // Dependencies and scripts

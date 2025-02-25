@@ -1,9 +1,23 @@
 // IMPORTS.
 import express, { Application } from "express";
 import { errorHandler } from "./middlewares/errorHandlers/errorHandler.middleware";
+import dotenv from "dotenv";
+import cors from "cors";
+import { corsConfig } from "./config/cors.config";
 
 // APP.
+dotenv.config();
 const app: Application = express();
-app.use(errorHandler); // Always use it in the bottom of your code brother.
+
+// CORS.
+app.use(cors(corsConfig));
+
+// Middlewares.
+app.use(express.json());
+
+// ErrorHanler.
+app.use(errorHandler);
+
+// Exporting the configured express app.
 export { app };
 
