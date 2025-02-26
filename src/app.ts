@@ -4,12 +4,14 @@ import { errorHandler } from "./middlewares/errorHandlers/errorHandler.middlewar
 import dotenv from "dotenv";
 import cors from "cors";
 import { corsConfig } from "./config/cors.config";
+import helmet from "helmet";
 
-// APP.
+// APP ("security section" should always be at the top and "errohandler section" always at the bottom).
 dotenv.config();
 const app: Application = express();
 
-// CORS.
+// Security.
+app.use(helmet());
 app.use(cors(corsConfig));
 
 // Middlewares.

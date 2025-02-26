@@ -1,8 +1,7 @@
 /project-root
 │── /src
 │   ├── /config
-│   │   ├── config.ts             // Global configuration, environment settings
-│   │   ├── database.ts           // DB connection logic
+│   │   ├── config.ts
 │   │
 │   ├── /controllers
 │   │   ├── auth.controller.ts
@@ -17,11 +16,10 @@
 │   │   ├── auth.routes.ts
 │   │   ├── course.routes.ts
 │   │   ├── user.routes.ts
-│   │   ├── index.ts               // Centralized route aggregator
 │   │
 │   ├── /middlewares
 │   │   ├── auth.middleware.ts
-│   │   ├── error.middleware.ts    // Global error handling
+│   │   ├── error.middleware.ts
 │   │   ├── validation.middleware.ts
 │   │
 │   ├── /services
@@ -30,15 +28,15 @@
 │   │   ├── user.service.ts
 │   │
 │   ├── /utils
-│   │   ├── logger.ts              // Custom logger (e.g., using Winston)
-│   │   ├── helper.ts              // Utility functions
+│   │   ├── logger.ts              
+│   │   ├── helper.ts            
 │   │
 │   ├── /tests
-│   │   ├── /unit                  // Unit tests
-│   │   ├── /integration           // Integration tests
+│   │   ├── /unit                
+│   │   ├── /integration         
 │   │
 │   ├── app.ts                     // Express app instance
 │   ├── server.ts                  // Entry point: bootstraps the app
 │
-├── .env                            // Environment variables (never commit this file)
-├── package.json                    // Dependencies and scripts
+├── .env                          
+├── package.json             
