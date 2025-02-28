@@ -1,7 +1,7 @@
 // IMPORTS.
 import { app } from "./app"
 import dotenv from "dotenv";
-import { connectPrimaryDB } from "./utils/connectPrimaryDB";
+import { connectPrimaryDB } from "./utils/connectPrimaryDB.util";
 
 // SERVER.
 dotenv.config();
