@@ -42,5 +42,7 @@ export const sendLoginOTP = asyncErrorHandler(async (
     user!.OTP = OTP;
     user!.OTPexpiry = OTPexpiry;
     await user!.save();
+
+    // Sending OTP to user's email address.
     
 });
