@@ -3,6 +3,9 @@ import { z } from "zod";
 import { asyncErrorHandler } from "../../middlewares/errorHandlers/asyncErrorHandler.middleware";
 import { NextFunction, Request, Response } from "express";
 import User, { IUser } from "../../models/user/user.model";
+import path from "path";
+import ejs from "ejs";
+import { Resend } from "resend";
 
 // SEND LOGIN OTP TO EMAIL.
 type RequestType = { email: string };
@@ -14,9 +17,12 @@ export const sendLoginOTP = asyncErrorHandler(async (
     next: NextFunction,
 ): Promise<void> => {
     const reqBody: RequestType = req.body;
+    if (!process.env.RESEND_API_KEY) {
+        throw new Error("RESEND_API_KEY is not defined in enviroment variables.");
+    };
 
-    // Validate request data.
     const parsedRequestData = requestSchema.safeParse(reqBody);
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Handle invalid request data.
     if (!parsedRequestData.success) {
@@ -36,7 +42,7 @@ export const sendLoginOTP = asyncErrorHandler(async (
     };
 
     // Update OTP and OTP expiry time in user's database.
-    const OTP = Math.floor(100000 + Math.random() * 9000000);
+    const OTP = Math.floor(100000 + Math.random() * 900000);
     const OTPexpiry = new Date();
     OTPexpiry.setSeconds(OTPexpiry.getSeconds() + 45);
     user!.OTP = OTP;
@@ -44,5 +50,28 @@ export const sendLoginOTP = asyncErrorHandler(async (
     await user!.save();
 
     // Sending OTP to user's email address.
-    
+    const templatePath = path.join(__dirname, "../../views/emails/loginOTP.email.ejs");
+    const html: string = await ejs.renderFile(templatePath, { OTP });
+
+    const { error } = await resend.emails.send({
+        from: "onboarding@resend.dev",
+        to: reqBody.email,
+        subject: "Login OTP",
+        html,
+    });
+
+    if (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+        return;
+    };
+
+    // Sending response.
+    res.status(201).json({
+        success: true,
+        message: "OTP sent to your email.",
+    });
+    return;
 });
