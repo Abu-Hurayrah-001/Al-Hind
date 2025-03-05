@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { corsConfig } from "./config/cors.config";
 import helmet from "helmet";
+import sendLoginOTPRouter from "./routes/auth/sendLoginOTP.route";
 
 // APP ("security section" should always be at the top and "errohandler section" always at the bottom).
 dotenv.config();
@@ -16,6 +17,9 @@ app.use(cors(corsConfig));
 
 // Middlewares.
 app.use(express.json());
+
+// Routes.
+app.use("/api/auth/send-login-otp", sendLoginOTPRouter);
 
 // ErrorHanler.
 app.use(errorHandler);
