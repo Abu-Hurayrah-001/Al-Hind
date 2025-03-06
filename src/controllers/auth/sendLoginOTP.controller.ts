@@ -1,7 +1,7 @@
 // IMPORTS.
 import { z } from "zod";
 import { asyncErrorHandler } from "../../middlewares/errorHandlers/asyncErrorHandler.middleware";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import User, { IUser } from "../../models/user/user.model";
 import path from "path";
 import ejs from "ejs";
@@ -9,12 +9,16 @@ import { Resend } from "resend";
 
 // SEND LOGIN OTP TO EMAIL.
 type RequestType = { email: string };
-const requestSchema = z.object({ email: z.string().email() });
+const requestSchema = z.object({
+    email: z
+        .string()
+        .nonempty("Email is required.")
+        .email("Please enter a valid email address.")
+});
 
 export const sendLoginOTP = asyncErrorHandler(async (
     req: Request,
     res: Response,
-    next: NextFunction,
 ): Promise<void> => {
     const reqBody: RequestType = req.body;
     if (!process.env.RESEND_API_KEY) {
