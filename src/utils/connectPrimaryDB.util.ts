@@ -8,7 +8,7 @@ if (dbURI === "") {
 };
 
 let retries = 10;
-export const connectPrimaryDB = async(): Promise<void> => {
+export const connectPrimaryDB = async (): Promise<void> => {
     try {
         const mongoConnection = await mongoose.connect(dbURI);
         console.log(`Database connect to: ${mongoConnection.connection.host}`);
